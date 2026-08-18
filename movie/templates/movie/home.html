@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Movies</title>
+</head>
+
+<body>
+
+<h1>Lista de películas</h1>
+
+<h2>David Zapata</h2>
+
+<h1>Lista de películas</h1>
+
+<h2>David Zapata</h2>
+
+<form method="GET">
+    <input type="text" name="search" placeholder="Buscar película">
+    <button type="submit">Buscar</button>
+</form>
+
+{% for movie in movies %}
+
+<h3>{{ movie.name }}</h3>
+<p>{{ movie.description }}</p>
+<p>Fecha de estreno: {{ movie.release_date }}</p>
+
+<hr>
+
+{% empty %}
+
+<p>No hay películas registradas.</p>
+
+{% endfor %}
+
+<a href="/about/">About</a>
+
+</body>
+</html>
