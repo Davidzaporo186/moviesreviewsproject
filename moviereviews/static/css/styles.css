@@ -1,0 +1,29 @@
+.movie-card {
+  overflow: hidden;
+}
+
+.movie-poster {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  background: #1f2937;
+}
+
+.movie-description {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Evidencia responsive: en una ventana pequeña cada película ocupa toda la fila. */
+@media (max-width: 575.98px) {
+  .movies-list > .col {
+    width: 100%;
+  }
+
+  .movie-card {
+    max-width: 360px;
+    margin-inline: auto;
+  }
+}
