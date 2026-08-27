@@ -1,4 +1,5 @@
 import csv
+import hashlib
 import re
 import unicodedata
 from pathlib import Path
@@ -19,11 +20,14 @@ def create_movie_cover(path, title, genre, year):
     """Crea una portada local para que todas las películas tengan imagen."""
     path.parent.mkdir(parents=True, exist_ok=True)
     width, height = 600, 900
-    image = Image.new('RGB', (width, height), '#16213e')
+    digest = hashlib.sha256(title.encode('utf-8')).digest()
+    background = tuple(35 + digest[i] % 95 for i in range(3))
+    header = tuple(max(12, value - 45) for value in background)
+    image = Image.new('RGB', (width, height), background)
     draw = ImageDraw.Draw(image)
 
-    # Fondo cinematográfico sencillo y sin depender de imágenes externas.
-    draw.rectangle((0, 0, width, 170), fill='#111827')
+    # Cada título recibe una combinación de color distinta.
+    draw.rectangle((0, 0, width, 170), fill=header)
     for x in range(-30, width + 50, 85):
         draw.rounded_rectangle((x, 48, x + 55, 125), radius=8, outline='white', width=3)
     draw.ellipse((120, 230, 480, 590), outline='white', width=9)
