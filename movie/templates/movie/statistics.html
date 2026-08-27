@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1 class="mb-4">Statistics</h1>
+<div class="card mb-4 shadow-sm">
+  <div class="card-body">
+    <h2 class="h4">Películas por año</h2>
+    <img src="data:image/png;base64,{{ year_graphic }}" class="img-fluid" alt="Gráfica de películas por año">
+  </div>
+</div>
+<div class="card shadow-sm">
+  <div class="card-body">
+    <h2 class="h4">Películas por género</h2>
+    <img src="data:image/png;base64,{{ genre_graphic }}" class="img-fluid" alt="Gráfica de películas por género">
+  </div>
+</div>
+{% endblock content %}

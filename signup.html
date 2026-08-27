@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card shadow-sm">
+  <div class="card-body">
+    <h1>Sign Up</h1>
+    {% if email %}<p>Correo recibido: <strong>{{ email }}</strong></p>{% endif %}
+    <a href="{% url 'home' %}" class="btn btn-primary">Volver</a>
+  </div>
+</div>
+{% endblock content %}

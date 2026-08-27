@@ -1,16 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>About</title>
-</head>
-
-<body>
-
-<h1>About</h1>
-
-<p>Aplicación desarrollada para el taller de Django.</p>
-
-<a href="/">Home</a>
-
-</body>
-</html>
+{% extends 'base.html' %}
+{% block content %}
+<div class="card shadow-sm">
+  <div class="card-body">
+    <h1>About</h1>
+    <p>Aplicación Movie Reviews desarrollada para el Taller 2 de Frontend y BD.</p>
+    <p>Permite listar y buscar películas, consultar noticias y visualizar estadísticas.</p>
+  </div>
+</div>
+{% endblock content %}

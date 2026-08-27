@@ -1,39 +1,50 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Movies</title>
-</head>
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="mb-4">
+  <h1 class="mb-3">Películas</h1>
+  <form method="get" action="{% url 'home' %}">
+    <label for="searchMovie" class="form-label">Buscar película</label>
+    <div class="input-group">
+      <input id="searchMovie" type="text" class="form-control" name="searchMovie" value="{{ searchTerm }}" placeholder="Ej. Frankenstein">
+      <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+  </form>
+</div>
 
-<body>
+{% if searchTerm %}
+<p class="text-muted">Resultados para: <strong>{{ searchTerm }}</strong></p>
+{% endif %}
 
-<h1>Lista de películas</h1>
-
-<h2>David Zapata</h2>
-
-<h1>Lista de películas</h1>
-
-<h2>David Zapata</h2>
-
-<form method="GET">
-    <input type="text" name="search" placeholder="Buscar película">
-    <button type="submit">Buscar</button>
-</form>
-
+<div class="row row-cols-1 row-cols-md-3 g-4">
 {% for movie in movies %}
-
-<h3>{{ movie.name }}</h3>
-<p>{{ movie.description }}</p>
-<p>Fecha de estreno: {{ movie.release_date }}</p>
-
-<hr>
-
+  <div class="col">
+    <div class="card h-100 shadow-sm">
+      <img src="{{ movie.image.url }}" class="card-img-top" alt="{{ movie.title }}" style="height:220px; object-fit:cover;">
+      <div class="card-body">
+        <h5 class="card-title">{{ movie.title }}</h5>
+        <p class="card-text"><strong>Género:</strong> {{ movie.genre }}</p>
+        <p class="card-text"><strong>Año:</strong> {{ movie.year }}</p>
+        <p class="card-text">{{ movie.description }}</p>
+        {% if movie.url %}
+          <a href="{{ movie.url }}" class="btn btn-primary" target="_blank">Movie Link</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
 {% empty %}
-
-<p>No hay películas registradas.</p>
-
+  <div class="col-12"><div class="alert alert-warning">No se encontraron películas.</div></div>
 {% endfor %}
+</div>
 
-<a href="/about/">About</a>
-
-</body>
-</html>
+<hr class="my-4">
+<form method="get" action="{% url 'signup' %}" class="row g-2">
+  <div class="col-md-8">
+    <label for="email" class="form-label">Suscríbete a novedades</label>
+    <input id="email" type="email" name="email" class="form-control" placeholder="correo@ejemplo.com">
+  </div>
+  <div class="col-md-4 d-flex align-items-end">
+    <button type="submit" class="btn btn-success w-100">Sign Up</button>
+  </div>
+</form>
+{% endblock content %}
