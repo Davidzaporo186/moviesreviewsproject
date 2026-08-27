@@ -3,7 +3,7 @@
 {% block content %}
 <div class="mb-4">
   <h1 class="mb-3">Películas</h1>
-  <form method="get" action="{% url 'home' %}">
+  <form method="get" action="{% url 'search_movies' %}">
     <label for="searchMovie" class="form-label">Buscar película</label>
     <div class="input-group">
       <input id="searchMovie" type="text" class="form-control" name="searchMovie" value="{{ searchTerm }}" placeholder="Ej. Frankenstein">

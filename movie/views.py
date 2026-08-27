@@ -11,13 +11,22 @@ from .models import Movie
 
 
 def home(request):
-    query = request.GET.get('searchMovie') or request.GET.get('search')
+    movies = Movie.objects.all().order_by('title')
+    return render(request, 'movie/home.html', {
+        'movies': movies,
+        'searchTerm': '',
+    })
+
+
+def search_movies(request):
+    """Busca películas por título usando una coincidencia parcial."""
+    query = (request.GET.get('searchMovie') or request.GET.get('search') or '').strip()
     movies = Movie.objects.all().order_by('title')
     if query:
         movies = movies.filter(title__icontains=query)
     return render(request, 'movie/home.html', {
         'movies': movies,
-        'searchTerm': query or '',
+        'searchTerm': query,
     })
 
 
