@@ -50,39 +50,41 @@ def _chart_to_base64():
 
 
 def statistics_view(request):
-    # Películas por año
+    # Películas por año: se ordenan cronológicamente para que la gráfica sea legible.
     year_counts = {}
-    for movie in Movie.objects.all():
-        key = movie.year if movie.year else 'None'
-        year_counts[key] = year_counts.get(key, 0) + 1
+    for movie in Movie.objects.exclude(year__isnull=True):
+        year_counts[movie.year] = year_counts.get(movie.year, 0) + 1
 
-    years = list(year_counts.keys())
-    year_values = list(year_counts.values())
+    years = sorted(year_counts)
+    year_values = [year_counts[year] for year in years]
 
-    plt.figure(figsize=(10, 5))
-    plt.bar(range(len(years)), year_values)
-    plt.title('Movies per year')
-    plt.xlabel('Year')
-    plt.ylabel('Number of movies')
-    plt.xticks(range(len(years)), years, rotation=90)
+    plt.figure(figsize=(12, 5))
+    plt.bar(years, year_values)
+    plt.title('Películas por año')
+    plt.xlabel('Año')
+    plt.ylabel('Cantidad de películas')
+    plt.xticks(rotation=90, fontsize=7)
+    plt.grid(axis='y', alpha=0.2)
     plt.tight_layout()
     year_graphic = _chart_to_base64()
 
-    # Películas por primer género
+    # Películas por género: una película suma en cada género que tenga en el dataset.
     genre_counts = {}
     for movie in Movie.objects.all():
-        genre = (movie.genre or 'Unknown').split(',')[0].strip()
-        genre_counts[genre] = genre_counts.get(genre, 0) + 1
+        genres_for_movie = [g.strip() for g in (movie.genre or 'Unknown').split(',') if g.strip()]
+        for genre in genres_for_movie or ['Unknown']:
+            genre_counts[genre] = genre_counts.get(genre, 0) + 1
 
-    genres = list(genre_counts.keys())
-    genre_values = list(genre_counts.values())
+    genres = sorted(genre_counts, key=genre_counts.get, reverse=True)
+    genre_values = [genre_counts[genre] for genre in genres]
 
-    plt.figure(figsize=(10, 5))
-    plt.bar(range(len(genres)), genre_values)
-    plt.title('Movies per genre')
-    plt.xlabel('Genre')
-    plt.ylabel('Number of movies')
-    plt.xticks(range(len(genres)), genres, rotation=45, ha='right')
+    plt.figure(figsize=(12, 5))
+    plt.bar(genres, genre_values)
+    plt.title('Películas por género')
+    plt.xlabel('Género')
+    plt.ylabel('Cantidad de películas')
+    plt.xticks(rotation=45, ha='right')
+    plt.grid(axis='y', alpha=0.2)
     plt.tight_layout()
     genre_graphic = _chart_to_base64()
 

@@ -39,3 +39,20 @@
 .site-footer .small {
   color: #adb5bd;
 }
+
+/* News del Taller 2: Horizontal Cards de Bootstrap. */
+.news-card {
+  max-width: 960px;
+  margin-inline: auto;
+}
+
+.news-card-image {
+  min-height: 220px;
+  object-fit: cover;
+}
+
+@media (max-width: 767.98px) {
+  .news-card-image {
+    max-height: 230px;
+  }
+}
