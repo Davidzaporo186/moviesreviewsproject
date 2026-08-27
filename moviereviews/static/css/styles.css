@@ -27,3 +27,15 @@
     margin-inline: auto;
   }
 }
+
+
+/* Pie de página: permanece al final y mantiene el estilo oscuro del sitio. */
+.site-footer {
+  background: #111111;
+  color: #f8f9fa;
+  border-top: 1px solid #343a40;
+}
+
+.site-footer .small {
+  color: #adb5bd;
+}
