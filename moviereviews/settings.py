@@ -4,7 +4,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-taller2-moviesreviews'
 DEBUG = True
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['98.82.184.250']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
