@@ -26,9 +26,6 @@
         <p class="card-text"><strong>Género:</strong> {{ movie.genre }}</p>
         <p class="card-text"><strong>Año:</strong> {{ movie.year }}</p>
         <p class="card-text movie-description">{{ movie.description }}</p>
-        {% if movie.url %}
-          <a href="{{ movie.url }}" class="btn btn-primary" target="_blank">Movie Link</a>
-        {% endif %}
       </div>
     </div>
   </div>
